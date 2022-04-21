@@ -6,6 +6,7 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
@@ -21,7 +22,11 @@ type CLIOptions struct {
 }
 
 func (opt *CLIOptions) options() {
-	port := flag.String("port", ":8080", "Interface and port to listen on")
+	p := os.Getenv("INTF")
+	if "" == p {
+		p = ":8080"
+	}
+	port := flag.String("port", p, "Interface and port to listen on")
 	staticDir := flag.String("staticDir", "./static", "Directory of static resources")
 	mode := flag.String("mode", "debug", "Gin mode: debug, test, release")
 
