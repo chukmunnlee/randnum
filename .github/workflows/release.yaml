@@ -37,7 +37,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "Name: Fred Flintstone\nMatriculation: abc123\nEmail: fred@gmail.com\nRepo: https://github.com/${{ github.repository }}\nImage name: fred/randnum:${{ github.ref_name }}"
+                  "text": "Name: Fred Flintstone\nMatriculation: abc123\nEmail: fred@gmail.com\nRepo: https://github.com/${{ github.repository }}\nImage name: fred/randnum:${{ github.ref_name }}\nImage url: https://hub.docker.com/repository/docker/chukmunnlee/randnum"
                 }
               }
             ]
