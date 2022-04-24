@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Echo message  
-      run: echo ${{ github.event }}
+      run: echo ${{ toJSON(github.event) }}
     - name: Checkout source
       uses: actions/checkout@v2
     - name: Login to Docker hub
