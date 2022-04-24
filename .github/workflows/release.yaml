@@ -7,6 +7,11 @@ on:
 
 jobs:
   random_num:
+    env:
+      IMAGE_NAME: chukmunnlee/randnum:${{ github.ref_name }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+    if: ! contains(github.event.head_commit.message, "#NORUN#")
     runs-on: ubuntu-latest
     steps:
     - name: Checkout source
@@ -24,25 +29,21 @@ jobs:
       with:
         context: .
         push: true
-        tags: chukmunnlee/randnum:${{ github.ref_name }}
+        tags: ${{ env.IMAGE_NAME }}
         #tags: chukmunnlee/randnum:${{ steps.get_commit_id.outputs.shorthash }}
     - name: Push notification to slack
       uses: slackapi/slack-github-action@v1.18.0
       with:
         payload: |
           {
-            "text": "Pushed build to Dockerhub: chukmunnlee/randnum:${{ github.ref_name }}",
+            "text": "Pushed build to Dockerhub: ${{ env.IMAGE_NAME }}",
             "blocks": [
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "Name: Fred Flintstone\nMatriculation: abc123\nEmail: fred@gmail.com\nRepo: https://github.com/${{ github.repository }}\nImage name: fred/randnum:${{ github.ref_name }}\nImage url: https://hub.docker.com/repository/docker/chukmunnlee/randnum"
+                  "text": "Name: Fred Flintstone\nMatriculation: abc123\nEmail: fred@gmail.com\nRepo: https://github.com/${{ github.repository }}\nImage name: ${{ env.IMAGE_NAME }}\nImage url: https://hub.docker.com/repository/docker/chukmunnlee/randnum"
                 }
               }
             ]
           }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
