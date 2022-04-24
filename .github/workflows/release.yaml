@@ -12,11 +12,8 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
       REPO_URL: ${{ github.repositoryUrl }}
-    if: ${{ ! contains(github.event.head_commit.message, '#NORUN#') }}
     runs-on: ubuntu-latest
     steps:
-    - name: Echo message  
-      run: echo ${{ toJSON(github.event) }}
     - name: Checkout source
       uses: actions/checkout@v2
     - name: Login to Docker hub
