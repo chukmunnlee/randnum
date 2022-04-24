@@ -19,7 +19,6 @@ ADD static static
 ADD views views
 
 ENV PORT="8080" 
-ENV INTF=":${PORT}" 
 
 EXPOSE ${PORT}
 
