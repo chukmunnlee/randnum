@@ -26,7 +26,7 @@ func (opt *CLIOptions) options() {
 	if "" == p {
 		p = "8080"
 	}
-	port := flag.String("port", fmt.Sprintf(":%s", p), "Interface and port to listen on")
+	port := flag.String("port", fmt.Sprintf(":%s", p), "Port to listen on")
 	staticDir := flag.String("staticDir", "./static", "Directory of static resources")
 	mode := flag.String("mode", "debug", "Gin mode: debug, test, release")
 
